@@ -1,0 +1,19 @@
+version: '3.6'
+services:
+  composer:
+    image: composer
+    command: install
+    container_name: composer
+    volumes:
+      - .:/app
+  php:
+    build: .
+    ports:
+      - 8383:80
+      - 8543:443
+    container_name: fatesla
+    depends_on:
+      - composer
+    volumes:
+      - ./:/var/www/html
+    network_mode: bridge
